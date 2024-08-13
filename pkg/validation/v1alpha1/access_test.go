@@ -43,7 +43,10 @@ apiVersion: hub.traefik.io/v1alpha1
 kind: APIAccess
 metadata:
   name: my-access
-  namespace: default`),
+  namespace: default
+spec:
+  apiPlan:
+    name: my-plan`),
 		},
 		{
 			desc: "valid: full",
@@ -54,6 +57,8 @@ metadata:
   name: my-access
   namespace: default
 spec:
+  apiPlan:
+    name: my-plan
   groups:
     - my-group
   apis:
@@ -104,6 +109,8 @@ metadata:
   name: my-access
   namespace: default
 spec:
+  apiPlan:
+    name: my-plan
   apis:
     - name: my-api
     - name: my-api`),
@@ -118,6 +125,8 @@ metadata:
   name: my-access
   namespace: default
 spec:
+  apiPlan:
+    name: my-plan
   apis:
     - name: my-api
     - name: my-api`),
@@ -132,6 +141,8 @@ metadata:
   name: my-access
   namespace: default
 spec:
+  apiPlan:
+    name: my-plan
   apiSelector:
     matchExpressions:
       - key: value`),
@@ -146,6 +157,8 @@ metadata:
   name: my-access
   namespace: default
 spec:
+  apiPlan:
+    name: my-plan
   everyone: true
   groups:
     - my-group`),

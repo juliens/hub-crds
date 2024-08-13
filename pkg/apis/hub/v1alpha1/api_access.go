@@ -64,11 +64,26 @@ type APIAccessSpec struct {
 	// +kubebuilder:validation:XValidation:message="duplicated apis",rule="self.all(x, self.exists_one(y, x.name == y.name))"
 	APIs []APIReference `json:"apis,omitempty"`
 
+	// APIPlan defines an APIPlan that will be used to the configured plan policy.
+	// Multiple APIAccesses can select the same APIPlan.
+	APIPlan APIPlanReference `json:"apiPlan,omitempty"`
+
 	// OperationFilter specifies the allowed operations on APIs and APIVersions.
 	// If not set, all operations are available.
 	// An empty OperationFilter prohibits all operations.
 	// +optional
 	OperationFilter *OperationFilter `json:"operationFilter,omitempty"`
+
+	// Weight is a number to have a specific order when you have multiple access.
+	// +kubebuilder:validation:XValidation:message="must be a positive number",rule="self >= 0"
+	Weight int `json:"weight,omitempty"`
+}
+
+// APIPlanReference references an APIPlan.
+type APIPlanReference struct {
+	// Name of the APIPlan.
+	// +kubebuilder:validation:MaxLength=253
+	Name string `json:"name"`
 }
 
 // APIReference references an API.
